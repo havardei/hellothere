@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellothere-db
+  labels:
+    app: hellothere-db
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hellothere-db
+     spec:
+      containers:
+        - name: hellothere-db
+          image: mariadb:focal
+          ports:
+            - containerPort: 3306
+              name: db-port
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: my-password

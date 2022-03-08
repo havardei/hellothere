@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellothere-web
+  labels:
+    app: hellothere-web
+spec:
+  selector:
+    matchLabels:
+      app: hellothere-web
+  template:
+    metadata:
+      labels:
+        app: hellothere-web
+    spec:
+      containers:
+        - name: hellothere-web
+          volumeMounts:
+          - name: config
+            mountPath: /mount
+            readOnly: true
+          image: havardei/php:mysqli
+          env:
+            - name: APACHE_DOCUMENT_ROOT
+              value: '/var/www/html/hellothere'
+          ports:
+            - containerPort: 80
+      volumes:
+      - name: config
+        configMap:
+          name: fancy-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: fancy-service
+spec:
+  selector:
+    app: hellothere-web
+  ports:
+    - port: 80
