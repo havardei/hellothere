@@ -48,24 +48,22 @@ spec:
     - port: 80
 
 ---
-apiVersion: networking.k8s.io/v1    
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: hellothere-web  
+  name: hellothere-web
   namespace: hellothere
-spec:
-  rules:
-  - host: hellothere.localhost
+spec:     
+  rules:  
+  - host: hellothere.testapps.stack.it.ntnu.no
     http:
       paths:
       - backend:
-          service:
-            name:  hellothere-web
-            port:
-              number: 80
+          serviceName: hellothere-web
+          servicePort: 80
         path: /
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - hellothere.localhost
+    - hellothere.testapps.stack.it.ntnu.no
     secretName: wildcard-tls
