@@ -2,15 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hellothere-db
+  namespace: hellothere
   labels:
     app: hellothere-db
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: hellothere-db
   template:
     metadata:
       labels:
         app: hellothere-db
-     spec:
+    spec:
       containers:
         - name: hellothere-db
           image: mariadb:focal
@@ -19,4 +22,19 @@ spec:
               name: db-port
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: my-password
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: password
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hellothere-db
+  namespace: hellothere
+spec:
+  selector:
+    app: hellothere-db
+  ports:
+    - port: 3306
