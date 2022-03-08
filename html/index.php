@@ -12,7 +12,7 @@
         </style>
 </head>
 <body>
-        <h1><?php echo "Hello there!"; ?></h1>
+        <h1><?php echo "Hello there!   "; ?></h1>
         <?php if(!$link) { ?>
                 <h2>Can't connect to MySQL Server!</h2>
         <?php } else { ?>
