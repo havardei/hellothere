@@ -1,5 +1,5 @@
 on: push
-name: deploy
+name: deploy to cluster
 jobs:
   deploy:
     name: deploy to cluster
