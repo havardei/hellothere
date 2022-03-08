@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hellothere-web
-          image: havardei/php7:apache-buster-mysql
+          image: havardei/hellothere:php7-mysqli
           env:
             - name: USERNAME
               valueFrom:
