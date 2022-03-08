@@ -10,14 +10,14 @@ jobs:
       uses: steebchen/kubectl@v2.0.0
       with: # defaults to latest kubectl binary version
         config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: kubectl apply -f $GITHUB_WORKSPACE/app_db.yaml
+        command: apply -f $GITHUB_WORKSPACE/app_db.yaml
     - name: deploy web
       uses: steebchen/kubectl@v2.0.0
       with:
         config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: kubectl apply -f $GITHUB_WORKSPACE/app_web.yaml
+        command: apply -f $GITHUB_WORKSPACE/app_web.yaml
     - name: make sure all containers restart
       uses: steebchen/kubectl@v2.0.0
       with:
         config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: kubectl delete pods --all
+        command: delete pods --all
